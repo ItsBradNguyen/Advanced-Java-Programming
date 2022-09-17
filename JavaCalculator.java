@@ -1,17 +1,22 @@
 import java.util.Scanner;
+import java.lang.Math.*;
 
 public class JavaCalculator{
     
     //basicCalculator function
     public static double basicCalculator(){
+        //basicCalculator Operators Information
+        System.out.print("This basic calculator can add(+), substract(-), multiply(*), and divide(/) any two inputted numbers.");
+        
+        //scanner
         Scanner input = new Scanner(System.in);
         
         //num1
-        System.out.print("Enter a number: ");
+        System.out.print("Please enter your first number: ");
         double num1 = input.nextDouble();
         
         //operator
-        System.out.print("Enter an operator: ");
+        System.out.print("Please enter an operator: ");
         String operator = input.next();
         boolean validOperator = false;
         
@@ -31,7 +36,7 @@ public class JavaCalculator{
             }
         }
         //num2
-        System.out.print("Enter a second number: ");
+        System.out.print("Please enter your second number: ");
         double num2 = input.nextDouble();            
         
         //result
@@ -51,7 +56,108 @@ public class JavaCalculator{
         } else if (operator.equals("/")) {
             result = num1 / num2;
         }
+        
+        //outcome
         System.out.print("The result is " + result);
+        return result;
+    }
+
+    //circumferenceCalculator function
+    public static double circumferenceCalculator(){
+        //shapes Information
+        System.out.println("This calculator can find the circumference of Triangle, Rectangle, Square, Circle, Parallelogram, Trapezoid, and Ellipse.");
+
+        //scanner 
+        Scanner input = new Scanner(System.in);
+
+        //shape
+        System.out.print("What is the geometric shape of the object? ");
+        String shape = input.next();
+        boolean validShape = true;
+
+        //validShape Logic
+        if (shape.equals("Triangle") || shape.equals("Rectangle") || shape.equals("Square") || shape.equals("Circle") || shape.equals("Parallelogram") || shape.equals("Trapezoid") || shape.equals("Ellipse")) {
+            validShape = true;
+        } else {
+            validShape = false;
+        }
+        while (validShape == false) {
+            System.out.print("Invalid Shape. Try again: ");
+            shape = input.next();
+            if (shape.equals("Triangle") || shape.equals("Rectangle") || shape.equals("Square") || shape.equals("Circle") || shape.equals("Parallelogram") || shape.equals("Trapezoid") || shape.equals("Ellipse")) {
+                validShape = true;
+            } else {
+                validShape = false;
+            }
+        }
+
+        //result
+        double result = 0;
+
+        //shape Logic
+        if (shape.equals("Triangle")) {            
+            //side1
+            System.out.print("Please enter the length of the first side: ");
+            Double side1 = input.nextDouble();
+            //side2
+            System.out.print("Please enter the length of the second side: ");
+            Double side2 = input.nextDouble();
+            //side3
+            System.out.print("Please enter the length of the third side: ");
+            Double side3 = input.nextDouble();
+            //circumference
+            result = side1 + side2 + side3;
+        } else if (shape.equals("Rectangle")) {
+            //side1
+            System.out.print("Please enter the length of the first side: ");
+            Double side1 = input.nextDouble();
+            //side2
+            System.out.print("Please enter the length of the second side: ");
+            Double side2 = input.nextDouble();
+            //circumference
+            result = 2 * (side1 + side2);
+        } else if (shape.equals("Circle")){
+            //radius
+            System.out.print("Please enter the radius: ");
+            double radius = input.nextDouble();
+            //circumference
+            return 2 * Math.PI * radius;
+        } else if (shape.equals("Parallelogram")) {
+            //side1
+            System.out.print("Please enter the length of the first side: ");
+            Double side1 = input.nextDouble();
+            //side2
+            System.out.print("Please enter the length of the second side: ");
+            Double side2 = input.nextDouble();
+            //circumference
+            result = 2 * (side1 + side2);
+        } else if (shape.equals("Trapezoid")) {
+            //parallelSide1
+            System.out.print("Please enter the length of the first parallel side: ");
+            Double parallelSide1 = input.nextDouble();
+            //parallelSide2
+            System.out.print("Please enter the length of the second parallel side: ");
+            Double parallelSide2 = input.nextDouble();
+            //leg
+            System.out.print("Please enter the length of the leg: ");
+            Double leg = input.nextDouble();
+            //circumference
+            result = parallelSide1 + parallelSide2 + leg * 2;
+        } else if (shape.equals("Ellipse")) {
+            //longRadius
+            System.out.print("Please enter the semi-major radius: ");
+            double longRadius = input.nextDouble();
+            //shortRadius
+            System.out.print("Please enter the semi-minor radius: ");
+            double shortRadius = input.nextDouble();
+            //h
+            double h = ((longRadius-shortRadius)*(longRadius-shortRadius))/((longRadius+shortRadius)*(longRadius+shortRadius));
+            //circumference
+            result = Math.PI * (longRadius + shortRadius) * (1 + ((3 * h) / (10 + Math.sqrt(4 - (3 * h)))));
+        }
+
+        //outcome
+        System.out.print("The circumference of your " + shape + " is " + result);
         return result;
     }
 
@@ -60,13 +166,15 @@ public class JavaCalculator{
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to Java Calculator!");
         System.out.println("This calculator can perform basic calculations \nand find circumference and area of geometric shapes.");
-        System.out.println("There are three functions to use: basic, circumference, and area.");
+        System.out.println("There are three functions to use: Basic, Circumference, and Area.");
         System.out.print("\nWhich function would you like to use? ");
         String userInput = input.next();
 
         //userInput Logic 
-        if (userInput.equals("basic")) {
+        if (userInput.equals("Basic")) {
             basicCalculator();
+        } else if (userInput.equals("Circumference")) {
+            circumferenceCalculator();
         } else {
             System.out.print("404 error code.");
         }
